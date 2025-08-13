@@ -1,0 +1,20 @@
+{
+  "name": "educhat",
+  "version": "1.0.0",
+  "description": "EduChat - AI-powered educational chat application",
+  "private": true,
+  "scripts": {
+    "build": "cd frontend && npm run build",
+    "dev": "cd frontend && npm start",
+    "install:frontend": "cd frontend && npm install",
+    "install:backend": "cd backend && npm install",
+    "dev:backend": "cd backend && npm run dev"
+  },
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
