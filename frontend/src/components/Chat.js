@@ -11,7 +11,8 @@ function Chat() {
     e.preventDefault();
 
     try {
-      const res = await axios.post('http://localhost:5000/api/chat/ask', { prompt });
+      const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+      const res = await axios.post(`${apiUrl}/api/chat/ask`, { prompt });
       setResponse(res.data.answer);
       setError('');
     } catch (err) {

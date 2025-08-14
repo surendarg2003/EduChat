@@ -6,14 +6,24 @@ const connectDB = require('./config/db');
 dotenv.config();
 
 const app = express();
-app.use(cors()); // <-- This allows React app (localhost:3000) to access backend
+app.use(cors());
 app.use(express.json());
 
 connectDB();
 
 app.use('/api/chat', require('./routes/chatRoutes'));
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+// Health check endpoint
+app.get('/', (req, res) => {
+  res.json({ message: 'Backend API is running!' });
 });
+
+// For Vercel serverless deployment
+if (process.env.NODE_ENV !== 'production') {
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+  });
+}
+
+module.exports = app;
